@@ -158,6 +158,9 @@
         <div class="card">
             <span id="type">Loading...</span>
             <div id="content">Reading the mystery...</div>
+            <div id="dare-bonus" style="display: none; color: #e11d48; font-size: 0.95rem; font-weight: 800; margin-bottom: 15px; padding: 10px; background: #ffe4e6; border-radius: 10px; border: 1px dashed #fda4af;">
+    📸 Screenshot, Record & tag us to get featured on the official CAIAS Insta page!
+</div>
             <div id="answer-box"></div>
             <button id="ans-btn" class="btn-ans" onclick="revealAnswer()">Reveal Answer 🔑</button>
         </div>
@@ -343,6 +346,11 @@
             document.getElementById('content').innerText = chosenItem.c;
             
             document.getElementById('answer-box').style.display = "none";
+            if (category === "DARE") {
+    document.getElementById('dare-bonus').style.display = "block";
+} else {
+    document.getElementById('dare-bonus').style.display = "none";
+}
             
             if (chosenItem.a) {
                 // If it's a Joke/Riddle: Show the Reveal button, keep WA button hidden
