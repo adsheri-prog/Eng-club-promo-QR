@@ -15,12 +15,13 @@
             align-items: center; 
             min-height: 100vh; 
             flex-direction: column;
-            /* Fun Canva-style polka dot background */
             background-color: #fdf2f8;
             background-image: radial-gradient(#fbcfe8 2px, transparent 2px);
             background-size: 30px 30px;
             position: relative;
             overflow: hidden;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         /* Floating Doodles */
@@ -31,17 +32,17 @@
         .d4 { bottom: 15%; right: 10%; animation-delay: 3s; transform: rotate(15deg); }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* Main Card Design */
+        /* Main Mystery Card */
         .card { 
             background: white; 
             padding: 40px 30px; 
             border-radius: 30px; 
             box-shadow: 0 15px 35px rgba(219, 39, 119, 0.15); 
-            width: 85%; 
+            width: 100%; 
             max-width: 340px; 
             margin-bottom: 25px; 
             border: 4px solid #fce7f3;
-            position: relative;
+            box-sizing: border-box;
         }
 
         #type { color: #db2777; font-weight: 900; text-transform: uppercase; font-size: 1rem; letter-spacing: 2px; display: block; margin-bottom: 15px; }
@@ -49,14 +50,43 @@
         
         #answer-box { display: none; color: #059669; font-weight: 900; margin: 15px 0; padding: 15px; border-top: 3px dashed #d1fae5; background: #ecfdf5; border-radius: 15px; font-size: 1.2rem; }
         
-        /* Reveal Button */
         .btn-ans { background: #f59e0b; color: white; border: none; padding: 16px 24px; border-radius: 20px; font-weight: 900; cursor: pointer; width: 100%; font-size: 1.1rem; margin-top: 10px; transition: 0.2s; display: none; box-shadow: 0 6px 0 #d97706; }
         .btn-ans:active { transform: translateY(6px); box-shadow: 0 0 0 #d97706; }
 
-        /* WhatsApp Section */
-        .wa-link { display: inline-flex; align-items: center; justify-content: center; background: white; color: #1f2937; text-decoration: none; font-weight: 900; padding: 14px 28px; border-radius: 50px; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2); border: 2px solid #e5e7eb; transition: 0.2s; font-size: 1.1rem; }
+        /* Welcome & WhatsApp Section */
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 340px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            box-sizing: border-box;
+            margin-bottom: 25px;
+        }
+        
+        .welcome-text {
+            color: #4b5563;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0 0 15px 0;
+            font-weight: 600;
+        }
+
+        .wa-link { display: inline-flex; align-items: center; justify-content: center; background: white; color: #1f2937; text-decoration: none; font-weight: 900; padding: 14px 28px; border-radius: 50px; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2); border: 2px solid #e5e7eb; transition: 0.2s; font-size: 1.1rem; width: 100%; box-sizing: border-box; }
         .wa-link:active { transform: scale(0.95); }
         .wa-icon { width: 28px; height: 28px; margin-left: 10px; fill: #25D366; }
+
+        /* Motivational Quote Footer */
+        .quote-box {
+            color: #db2777;
+            font-size: 0.9rem;
+            font-style: italic;
+            font-weight: 800;
+            max-width: 300px;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -74,19 +104,36 @@
         <button id="ans-btn" class="btn-ans" onclick="revealAnswer()">Reveal Answer 🔑</button>
     </div>
 
-    <div class="wa-container">
+    <div class="welcome-section">
+        <p class="welcome-text">Welcome to the English Club! We are a friendly, supportive community for students who want to practice speaking English without the stress. Tap the link below to join!</p>
         <a href="https://chat.whatsapp.com/IUc7l6fWtV1GsyCVFdBD5v?mode=gi_t" target="_blank" class="wa-link">
-            Join the Club!
+            Join the Club
             <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                 <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
             </svg>
         </a>
     </div>
 
+    <div id="quote-display" class="quote-box"></div>
+
     <script>
         const icons = { "FACT": "💡", "JOKE": "😂", "RIDDLE": "🤔", "DARE": "🎯" };
 
-        const items = [
+        const quotes = [
+            "Mistakes are just proof that you are trying! Keep going.",
+            "A different language is a different vision of life.",
+            "Don't be afraid to speak; every expert was once a beginner.",
+            "The beautiful thing about learning is nobody can take it from you.",
+            "Language is the road map of a culture.",
+            "Do what you can, with what you have, where you are.",
+            "Every time you speak, you are getting better and better.",
+            "Small steps every day lead to big results.",
+            "Learning a language is like opening a new window to the world.",
+            "Confidence comes from practice. You've got this!"
+        ];
+
+        // Ensure you paste YOUR FULL 100 ITEMS HERE! (I've included the first 8 to save space)
+       const items = [
             // 1-4
             {t: "FACT", c: "The word 'set' has the most definitions in the English dictionary."},
             {t: "JOKE", c: "Why was the math book sad?", a: "Because it had too many problems!"},
@@ -215,27 +262,29 @@
         ];
 
         function displayMysteryOnLoad() {
-            // Memory check
             let i = parseInt(localStorage.getItem('idx')) || 0;
             let item = items[i];
             
-            // Apply text and dynamic icon
+            // Set text & dynamic icon
             document.getElementById('type').innerText = `${icons[item.t]} ${item.t}`;
             document.getElementById('content').innerText = item.c;
             
-            // Reset answer box
+            // Set Motivational Quote based on the same index so it changes every time
+            document.getElementById('quote-display').innerText = `"${quotes[i % quotes.length]}"`;
+            
+            // Hide answer box initially
             document.getElementById('answer-box').style.display = "none";
             
             if (item.a) {
-                // Joke/Riddle
+                // Show Reveal Button if there is an answer
                 document.getElementById('ans-btn').style.display = "block";
                 document.getElementById('answer-box').innerText = item.a;
             } else {
-                // Fact/Dare
+                // Hide Reveal Button completely for Facts/Dares
                 document.getElementById('ans-btn').style.display = "none";
             }
 
-            // Tell the phone to queue up the next item for tomorrow!
+            // Save the next item for tomorrow's scan
             localStorage.setItem('idx', (i + 1) % items.length);
         }
 
@@ -244,7 +293,6 @@
             document.getElementById('ans-btn').style.display = "none";
         }
 
-        // Boom. Run it!
         window.onload = displayMysteryOnLoad;
     </script>
 </body>
