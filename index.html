@@ -32,61 +32,80 @@
         .d4 { bottom: 15%; right: 10%; animation-delay: 3s; transform: rotate(15deg); }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* Welcome & WhatsApp Section */
-        .welcome-section {
+        /* Welcome Text Box at the very top */
+        .welcome-box {
             background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
+            padding: 15px 20px;
             border-radius: 20px;
             width: 100%;
             max-width: 340px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
             box-sizing: border-box;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             border: 2px solid #fce7f3;
+            color: #4b5563; 
+            font-size: 0.95rem; 
+            line-height: 1.5; 
+            font-weight: 800;
         }
-        
-        .welcome-text { color: #4b5563; font-size: 0.95rem; line-height: 1.5; margin: 0 0 15px 0; font-weight: 800; }
 
-        /* --- THE WHEEL SECTION --- */
+        /* --- THE UPGRADED WHEEL SECTION --- */
         #wheel-section { display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 20px; }
         
-        .wheel-container { position: relative; width: 260px; height: 260px; margin: 10px auto 20px auto; }
+        .wheel-container { position: relative; width: 280px; height: 280px; margin: 20px auto 30px auto; }
         
-        /* The Pointer Arrow */
+        /* The Red Pointer Arrow */
         .pointer {
-            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
             width: 0; height: 0;
-            border-left: 18px solid transparent;
-            border-right: 18px solid transparent;
-            border-top: 30px solid #1f2937;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 35px solid #e11d48;
             z-index: 10;
-            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 4px 5px rgba(0,0,0,0.3));
         }
 
-        /* The Spinning Wheel */
+        /* The Decorated Wheel */
         .wheel {
             width: 100%; height: 100%; border-radius: 50%;
             background: conic-gradient(
-                #f472b6 0deg 90deg,   /* Pink: DARE */
-                #60a5fa 90deg 180deg, /* Blue: FACT */
-                #a78bfa 180deg 270deg,/* Purple: RIDDLE */
-                #fbbf24 270deg 360deg /* Yellow: JOKE */
+                #f43f5e 0deg 90deg,   /* Rose: DARE */
+                #3b82f6 90deg 180deg, /* Blue: FACT */
+                #8b5cf6 180deg 270deg,/* Purple: RIDDLE */
+                #f59e0b 270deg 360deg /* Amber: JOKE */
             );
             transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            border: 6px solid white;
+            border: 8px solid #1f2937;
+            box-shadow: 0 0 0 6px #fbcfe8, 0 15px 35px rgba(0,0,0,0.2);
             box-sizing: border-box;
             position: relative;
+            overflow: hidden;
+        }
+
+        /* Cross lines to separate the wheel slices */
+        .wheel-lines {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%;
+            background: 
+                linear-gradient(to right, transparent 48.5%, #1f2937 48.5%, #1f2937 51.5%, transparent 51.5%),
+                linear-gradient(to bottom, transparent 48.5%, #1f2937 48.5%, #1f2937 51.5%, transparent 51.5%);
+            z-index: 1;
+        }
+
+        /* Center Hub */
+        .wheel::after {
+            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 35px; height: 35px; background: white; border: 6px solid #1f2937; border-radius: 50%; z-index: 5;
+            box-shadow: inset 0 3px 5px rgba(0,0,0,0.3);
         }
 
         /* Wheel Text Labels */
-        .wheel-text { position: absolute; font-weight: 900; color: white; font-size: 1.1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); letter-spacing: 1px; }
+        .wheel-text { position: absolute; font-weight: 900; color: white; font-size: 1.2rem; text-shadow: 2px 2px 0px rgba(0,0,0,0.5); letter-spacing: 2px; z-index: 2; }
         .txt-dare { top: 18%; right: 12%; transform: rotate(45deg); }
         .txt-fact { bottom: 18%; right: 12%; transform: rotate(135deg); }
         .txt-riddle { bottom: 18%; left: 10%; transform: rotate(225deg); }
         .txt-joke { top: 18%; left: 12%; transform: rotate(315deg); }
 
-        .btn-spin { background: #db2777; color: white; border: none; padding: 16px 30px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 1.2rem; transition: 0.2s; box-shadow: 0 6px 0 #be185d; text-transform: uppercase; letter-spacing: 2px; }
+        .btn-spin { background: #db2777; color: white; border: none; padding: 16px 35px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 1.3rem; transition: 0.2s; box-shadow: 0 6px 0 #be185d; text-transform: uppercase; letter-spacing: 2px; }
         .btn-spin:active { transform: translateY(6px); box-shadow: 0 0 0 #be185d; }
         .btn-spin:disabled { background: #9ca3af; box-shadow: 0 6px 0 #6b7280; cursor: not-allowed; }
 
@@ -101,12 +120,13 @@
         .btn-ans { background: #f59e0b; color: white; border: none; padding: 16px 24px; border-radius: 20px; font-weight: 900; cursor: pointer; width: 100%; font-size: 1.1rem; margin-top: 10px; transition: 0.2s; display: none; box-shadow: 0 6px 0 #d97706; }
         .btn-ans:active { transform: translateY(6px); box-shadow: 0 0 0 #d97706; }
 
-        /* WhatsApp Button Below Everything */
-        .wa-link { display: inline-flex; align-items: center; justify-content: center; background: white; color: #1f2937; text-decoration: none; font-weight: 900; padding: 14px 28px; border-radius: 50px; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2); border: 2px solid #e5e7eb; transition: 0.2s; font-size: 1.1rem; width: 100%; box-sizing: border-box; }
+        /* WhatsApp Button (Hidden until appropriate) */
+        #wa-section { display: none; width: 100%; max-width: 340px; }
+        .wa-link { display: inline-flex; align-items: center; justify-content: center; background: white; color: #1f2937; text-decoration: none; font-weight: 900; padding: 16px 28px; border-radius: 50px; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2); border: 2px solid #e5e7eb; transition: 0.2s; font-size: 1.1rem; width: 100%; box-sizing: border-box; }
         .wa-link:active { transform: scale(0.95); }
         .wa-icon { width: 28px; height: 28px; margin-left: 10px; fill: #25D366; }
 
-        .quote-box { color: #db2777; font-size: 0.9rem; font-style: italic; font-weight: 800; max-width: 300px; opacity: 0.8; margin-top: 15px; }
+        .quote-box { color: #db2777; font-size: 0.9rem; font-style: italic; font-weight: 800; max-width: 300px; opacity: 0.8; margin-top: 25px; }
     </style>
 </head>
 <body>
@@ -116,19 +136,15 @@
     <div class="doodle d3">📖</div>
     <div class="doodle d4">🎉</div>
 
-    <div class="welcome-section">
-        <p class="welcome-text">Welcome to the English Club! We are a friendly, supportive community for students who want to practice speaking English without the stress.</p>
-        
-        <a href="https://chat.whatsapp.com/IUc7l6fWtV1GsyCVFdBD5v?mode=gi_t" target="_blank" class="wa-link">
-            Join the Club Here!
-            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
-        </a>
+    <div class="welcome-box">
+        Welcome to the English Club! We are a friendly, supportive community for students who want to practice speaking English without the stress.
     </div>
 
     <div id="wheel-section">
         <div class="wheel-container">
             <div class="pointer"></div>
             <div class="wheel" id="wheel">
+                <div class="wheel-lines"></div>
                 <span class="wheel-text txt-dare">DARE</span>
                 <span class="wheel-text txt-fact">FACT</span>
                 <span class="wheel-text txt-riddle">RIDDLE</span>
@@ -147,6 +163,13 @@
         </div>
     </div>
 
+    <div id="wa-section">
+        <a href="https://chat.whatsapp.com/IUc7l6fWtV1GsyCVFdBD5v?mode=gi_t" target="_blank" class="wa-link">
+            Join the Club Here!
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
+        </a>
+    </div>
+
     <div id="quote-display" class="quote-box"></div>
 
     <script>
@@ -156,136 +179,120 @@
             "A different language is a different vision of life.",
             "Don't be afraid to speak; every expert was once a beginner.",
             "The beautiful thing about learning is nobody can take it from you.",
-            "Language is the road map of a culture."
+            "Language is the road map of a culture.",
+            "Do what you can, with what you have, where you are.",
+            "Every time you speak, you are getting better and better."
         ];
 
-        // PASTE YOUR FULL 100 ITEMS HERE!
-       const items = [
-            // 1-4
-            {t: "FACT", c: "The word 'set' has the most definitions in the English dictionary."},
-            {t: "JOKE", c: "Why was the math book sad?", a: "Because it had too many problems!"},
-            {t: "RIDDLE", c: "What has a neck but no head?", a: "A bottle!"},
-            {t: "DARE", c: "Say 'Hello' to someone nearby in your best British accent!"},
-            // 5-8
-            {t: "FACT", c: "'Dreamt' is the only English word that ends in the letters 'mt'."},
-            {t: "JOKE", c: "What do you call a bear with no teeth?", a: "A gummy bear!"},
-            {t: "RIDDLE", c: "What has to be broken before you can use it?", a: "An egg!"},
-            {t: "DARE", c: "Recite the alphabet backwards in 15 seconds!"},
-            // 9-12
-            {t: "FACT", c: "The shortest complete sentence in English is 'I am.'"},
-            {t: "JOKE", c: "Why do we tell actors to 'break a leg'?", a: "Because every play has a cast!"},
-            {t: "RIDDLE", c: "What has many keys but can't open a single lock?", a: "A piano!"},
-            {t: "DARE", c: "Spell 'Onomatopoeia' out loud right now."},
-            // 13-16
-            {t: "FACT", c: "The dot over the letter 'i' or 'j' is officially called a 'tittle'."},
-            {t: "JOKE", c: "How do you make a tissue dance?", a: "You put a little boogey in it!"},
-            {t: "RIDDLE", c: "What has one eye but can’t see?", a: "A needle!"},
-            {t: "DARE", c: "Give a 30-second speech on why pizza is the best food."},
-            // 17-20
-            {t: "FACT", c: "'Typewriter' is the longest word you can type using only one row of the keyboard."},
-            {t: "JOKE", c: "What’s the longest word in the world?", a: "Smiles! (There is a mile between the S's)"},
-            {t: "RIDDLE", c: "What is full of holes but still holds water?", a: "A sponge!"},
-            {t: "DARE", c: "Compliment 3 people in English today."},
-            // 21-24
-            {t: "FACT", c: "English is the official language of 67 countries."},
-            {t: "JOKE", c: "What did the zero say to the eight?", a: "Nice belt!"},
-            {t: "RIDDLE", c: "What has a thumb and four fingers but is not a hand?", a: "A glove!"},
-            {t: "DARE", c: "Say 'She sells seashells by the seashore' three times fast!"},
-            // 25-28
-            {t: "FACT", c: "The most common adjective used in English is 'good'."},
-            {t: "JOKE", c: "Why did the teacher wear sunglasses?", a: "Because her students were so bright!"},
-            {t: "RIDDLE", c: "What comes down but never goes up?", a: "Rain!"},
-            {t: "DARE", c: "Sing the chorus of your favorite English song out loud."},
-            // 29-32
-            {t: "FACT", c: "A new word is added to the English dictionary every two hours."},
-            {t: "JOKE", c: "Why can't a nose be 12 inches long?", a: "Because then it would be a foot!"},
-            {t: "RIDDLE", c: "What has hands but cannot clap?", a: "A clock!"},
-            {t: "DARE", c: "Describe your current mood using only 3 English adjectives."},
-            // 33-36
-            {t: "FACT", c: "The most used noun in the English language is 'time'."},
-            {t: "JOKE", c: "What do you call a fish with no eyes?", a: "A fsh!"},
-            {t: "RIDDLE", c: "The more of this there is, the less you see. What is it?", a: "Darkness!"},
-            {t: "DARE", c: "Try to touch your nose with your tongue!"},
-            // 37-40
-            {t: "FACT", c: "About 4,000 words are added to the dictionary each year."},
-            {t: "JOKE", c: "Why did the cookie go to the doctor?", a: "Because he felt crumb-y!"},
-            {t: "RIDDLE", c: "What has a head and a tail but no body?", a: "A coin!"},
-            {t: "DARE", c: "Make up a pun about your English Club right now."},
-            // 41-44
-            {t: "FACT", c: "The word 'Queueing' is the only word with five consecutive vowels."},
-            {t: "JOKE", c: "What do you call cheese that isn't yours?", a: "Nacho cheese!"},
-            {t: "RIDDLE", c: "I’m tall when I’m young, and I’m short when I’m old. What am I?", a: "A candle!"},
-            {t: "DARE", c: "High-five the person closest to you!"},
-            // 45-48
-            {t: "FACT", c: "The word 'girl' used to mean a young person of either gender."},
-            {t: "JOKE", c: "Why did the bicycle fall over?", a: "Because it was two-tired!"},
-            {t: "RIDDLE", c: "What belongs to you but others use it more than you do?", a: "Your name!"},
-            {t: "DARE", c: "Do 5 jumping jacks while counting out loud in English."},
-            // 49-52
-            {t: "FACT", c: "There is no word in the English language that rhymes with 'month'."},
-            {t: "JOKE", c: "Why don't skeletons fight each other?", a: "They don't have the guts!"},
-            {t: "RIDDLE", c: "What can you catch but not throw?", a: "A cold!"},
-            {t: "DARE", c: "Talk about your favorite movie for 1 minute without stopping."},
-            // 53-56
-            {t: "FACT", c: "William Shakespeare invented over 1,700 words we use today."},
-            {t: "JOKE", c: "What time is it when the clock strikes 13?", a: "Time to get a new clock!"},
-            {t: "RIDDLE", c: "What begins with T, ends with T, and has T in it?", a: "A teapot!"},
-            {t: "DARE", c: "Pretend you are a news anchor reporting today's weather."},
-            // 57-60
-            {t: "FACT", c: "'E' is the most commonly used letter in the English alphabet."},
-            {t: "JOKE", c: "What falls, but never needs a bandage?", a: "The rain!"},
-            {t: "RIDDLE", c: "I have branches, but no fruit, trunk or leaves. What am I?", a: "A bank!"},
-            {t: "DARE", c: "Introduce yourself to a friend using a superhero voice."},
-            // 61-64
+        // THE FULL 100 ITEMS - READY TO GO!
+        const items = [
+            // --- 25 FACTS ---
+            {t: "FACT", c: "The shortest complete sentence in English is 'Go.'"},
+            {t: "FACT", c: "The word 'set' has the highest number of different meanings in the English dictionary."},
+            {t: "FACT", c: "'I am' is the shortest complete sentence in the English language."},
+            {t: "FACT", c: "A 'pangram' is a sentence that contains every letter of the alphabet."},
+            {t: "FACT", c: "The longest English word without a true vowel is 'rhythm'."},
             {t: "FACT", c: "More English words begin with the letter 'S' than any other letter."},
-            {t: "JOKE", c: "Why are ghosts bad liars?", a: "Because you can see right through them!"},
-            {t: "RIDDLE", c: "What has words, but never speaks?", a: "A book!"},
-            {t: "DARE", c: "Act out a famous scene from an English movie."},
-            // 65-68
             {t: "FACT", c: "The word 'alphabet' comes from the first two Greek letters: alpha and beta."},
-            {t: "JOKE", c: "Why did the tomato blush?", a: "Because it saw the salad dressing!"},
-            {t: "RIDDLE", c: "What gets wetter the more it dries?", a: "A towel!"},
-            {t: "DARE", c: "Name 10 animals in English in 10 seconds."},
-            // 69-72
-            {t: "FACT", c: "A 'jiffy' is an actual unit of time (1/100th of a second)."},
-            {t: "JOKE", c: "What do you call a fake noodle?", a: "An impasta!"},
-            {t: "RIDDLE", c: "What runs all around a backyard, yet never moves?", a: "A fence!"},
-            {t: "DARE", c: "Do your best evil laugh!"},
-            // 73-76
+            {t: "FACT", c: "The most common adjective used in English is 'good'."},
+            {t: "FACT", c: "The most commonly used noun in English is 'time'."},
             {t: "FACT", c: "'Uncopyrightable' is the longest English word that doesn't repeat a letter."},
+            {t: "FACT", c: "The dot over the letter 'i' and 'j' is called a 'tittle'."},
+            {t: "FACT", c: "The word 'girl' used to mean a child of either gender, not just female."},
+            {t: "FACT", c: "English is the official language of 67 different countries."},
+            {t: "FACT", c: "A new English word is added to the dictionary every two hours!"},
+            {t: "FACT", c: "'Queueing' is the only English word with five consecutive vowels."},
+            {t: "FACT", c: "The word 'goodbye' originally comes from an Old English phrase meaning 'God be with you'."},
+            {t: "FACT", c: "The oldest English word that is still in use is 'town'."},
+            {t: "FACT", c: "There are no words in English that rhyme with month, orange, silver, or purple."},
+            {t: "FACT", c: "'Pronunciation' is the most mispronounced word in the English language!"},
+            {t: "FACT", c: "Shakespeare added over 1,700 words to the English language."},
+            {t: "FACT", c: "The longest word in the dictionary has 45 letters (it's a lung disease)."},
+            {t: "FACT", c: "Approximately 1.5 billion people around the world speak English."},
+            {t: "FACT", c: "The word 'swims' looks exactly the same when turned upside down."},
+            {t: "FACT", c: "The symbol '#' is actually called an octothorpe, not a hashtag!"},
+            {t: "FACT", c: "English is the language of the sky! All international pilots must speak English."},
+
+            // --- 25 JOKES ---
+            {t: "JOKE", c: "Why was the math book sad?", a: "Because it had too many problems!"},
+            {t: "JOKE", c: "What do you call a bear with no teeth?", a: "A gummy bear!"},
+            {t: "JOKE", c: "Why did the student eat his homework?", a: "Because his teacher said it was a piece of cake!"},
+            {t: "JOKE", c: "What do you call a fake noodle?", a: "An impasta!"},
+            {t: "JOKE", c: "Why did the scarecrow win an award?", a: "Because he was outstanding in his field!"},
+            {t: "JOKE", c: "What has lots of eyes, but can’t see?", a: "A potato!"},
+            {t: "JOKE", c: "Why can't you give Elsa a balloon?", a: "Because she will 'Let it go'!"},
+            {t: "JOKE", c: "What do you call a funny mountain?", a: "Hill-arious!"},
+            {t: "JOKE", c: "Why do seagulls fly over the sea?", a: "Because if they flew over the bay, they'd be bagels!"},
+            {t: "JOKE", c: "What falls in winter but never gets hurt?", a: "Snow!"},
+            {t: "JOKE", c: "Why did the cookie go to the hospital?", a: "Because it felt crummy!"},
+            {t: "JOKE", c: "What do you call a dog that can do magic?", a: "A labracadabrador!"},
+            {t: "JOKE", c: "Why are ghosts such bad liars?", a: "Because you can see right through them!"},
+            {t: "JOKE", c: "What musical instrument is found in the bathroom?", a: "A tuba toothpaste!"},
+            {t: "JOKE", c: "Why did the bicycle fall over?", a: "Because it was two-tired!"},
+            {t: "JOKE", c: "What do you call cheese that isn't yours?", a: "Nacho cheese!"},
+            {t: "JOKE", c: "Why did the tomato turn red?", a: "Because it saw the salad dressing!"},
+            {t: "JOKE", c: "How does a penguin build its house?", a: "Igloos it together!"},
+            {t: "JOKE", c: "What time is it when the clock strikes 13?", a: "Time to get a new clock!"},
+            {t: "JOKE", c: "What gets wetter the more it dries?", a: "A towel!"},
+            {t: "JOKE", c: "What do you call an alligator in a vest?", a: "An investigator!"},
+            {t: "JOKE", c: "How do you make an octopus laugh?", a: "With ten-tickles!"},
+            {t: "JOKE", c: "Why couldn't the pony sing in the choir?", a: "Because he was a little horse!"},
             {t: "JOKE", c: "What do elves learn in school?", a: "The Elf-abet!"},
-            {t: "RIDDLE", c: "What can travel around the world while staying in a corner?", a: "A stamp!"},
-            {t: "DARE", c: "Give your best piece of advice in exactly 5 English words."},
-            // 77-80
-            {t: "FACT", c: "The original name for the butterfly was 'flutterby'."},
-            {t: "JOKE", c: "How does the ocean say hello?", a: "It waves!"},
-            {t: "RIDDLE", c: "What has 13 hearts, but no other organs?", a: "A deck of cards!"},
-            {t: "DARE", c: "Try to say 'Red lorry, yellow lorry' five times fast!"},
-            // 81-84
-            {t: "FACT", c: "The oldest word in the English language is believed to be 'town'."},
-            {t: "JOKE", c: "What did one wall say to the other?", a: "I'll meet you at the corner!"},
+            {t: "JOKE", c: "Why did the picture go to jail?", a: "Because it was framed!"},
+
+            // --- 25 RIDDLES ---
+            {t: "RIDDLE", c: "I have a neck but no head, and two arms but no hands. What am I?", a: "A shirt!"},
+            {t: "RIDDLE", c: "I speak without a mouth and hear without ears. What am I?", a: "An echo!"},
+            {t: "RIDDLE", c: "What has keys but can't open locks?", a: "A piano!"},
+            {t: "RIDDLE", c: "What belongs to you, but other people use it more than you do?", a: "Your name!"},
+            {t: "RIDDLE", c: "I am tall when I'm young, and I'm short when I'm old. What am I?", a: "A candle!"},
+            {t: "RIDDLE", c: "What has a head and a tail but no body?", a: "A coin!"},
+            {t: "RIDDLE", c: "What comes down but never goes up?", a: "Rain!"},
+            {t: "RIDDLE", c: "What has hands but cannot clap?", a: "A clock!"},
+            {t: "RIDDLE", c: "What has many teeth, but can't bite?", a: "A comb!"},
+            {t: "RIDDLE", c: "What gets bigger the more you take away?", a: "A hole!"},
+            {t: "RIDDLE", c: "What is full of holes but still holds water?", a: "A sponge!"},
+            {t: "RIDDLE", c: "Where does today come before yesterday?", a: "In the dictionary!"},
+            {t: "RIDDLE", c: "If you drop me I’m sure to crack, but give me a smile and I’ll always smile back. What am I?", a: "A mirror!"},
+            {t: "RIDDLE", c: "I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?", a: "A map!"},
             {t: "RIDDLE", c: "What goes up and down but doesn't move?", a: "A staircase!"},
-            {t: "DARE", c: "Yawn loudly and try to make someone else yawn too!"},
-            // 85-88
-            {t: "FACT", c: "The hashtag symbol (#) is officially called an octothorpe."},
-            {t: "JOKE", c: "What do you call a sleeping dinosaur?", a: "A dino-snore!"},
-            {t: "RIDDLE", c: "Where does today come before yesterday?", a: "The dictionary!"},
-            {t: "DARE", c: "Draw a smiley face on your hand or paper."},
-            // 89-92
-            {t: "FACT", c: "A flock of crows is known as a 'murder'."},
-            {t: "JOKE", c: "Why was the picture sent to jail?", a: "Because it was framed!"},
-            {t: "RIDDLE", c: "If you drop me I’m sure to crack, but give me a smile and I’ll always smile back.", a: "A mirror!"},
-            {t: "DARE", c: "Tell the person next to you why they are awesome."},
-            // 93-96
-            {t: "FACT", c: "The word 'SWIMS' upside-down is still 'SWIMS'."},
-            {t: "JOKE", c: "What do you call a dog that does magic tricks?", a: "A labracadabrador!"},
-            {t: "RIDDLE", c: "I shave every day, but my beard stays the same. What am I?", a: "A barber!"},
-            {t: "DARE", c: "Strike a dramatic pose for 5 seconds!"},
-            // 97-100
-            {t: "FACT", c: "'Goodbye' originally comes from the phrase 'God be with ye'."},
-            {t: "JOKE", c: "What kind of room has no doors or windows?", a: "A mushroom!"},
-            {t: "RIDDLE", c: "I have a tail and a head, but no body. What am I?", a: "A coin!"},
-            {t: "DARE", c: "Share this QR code with one other student today!"}
+            {t: "RIDDLE", c: "What has words, but never speaks?", a: "A book!"},
+            {t: "RIDDLE", c: "I fly without wings. I cry without eyes. What am I?", a: "A cloud!"},
+            {t: "RIDDLE", c: "What can you catch, but not throw?", a: "A cold!"},
+            {t: "RIDDLE", c: "What has one eye, but can't see?", a: "A needle!"},
+            {t: "RIDDLE", c: "What starts with an E, ends with an E, but only contains one letter?", a: "An envelope!"},
+            {t: "RIDDLE", c: "What building has the most stories?", a: "The library!"},
+            {t: "RIDDLE", c: "What tastes better than it smells?", a: "A tongue!"},
+            {t: "RIDDLE", c: "What runs all around a backyard, yet never moves?", a: "A fence!"},
+            {t: "RIDDLE", c: "You see me once in June, twice in November, and not at all in May. What am I?", a: "The letter 'E'!"},
+            {t: "RIDDLE", c: "I have branches, but no fruit, trunk or leaves. What am I?", a: "A bank!"},
+
+            // --- 25 DARES (Speaking challenges for the club!) ---
+            {t: "DARE", c: "Introduce yourself to the person next to you in your best British accent!"},
+            {t: "DARE", c: "Say the English alphabet backwards as fast as you can!"},
+            {t: "DARE", c: "Name 5 English words that start with the letter 'Z' in 10 seconds."},
+            {t: "DARE", c: "Speak for 30 seconds about why pizza is the best food in the world."},
+            {t: "DARE", c: "Compliment the person sitting across from you in English."},
+            {t: "DARE", c: "Tell the group about your favorite movie, but you only have 20 seconds!"},
+            {t: "DARE", c: "Sing the chorus of your favorite English song out loud!"},
+            {t: "DARE", c: "Act out a famous animal and let the group guess what it is in English."},
+            {t: "DARE", c: "Say this tongue twister fast 3 times: 'She sells seashells by the seashore'."},
+            {t: "DARE", c: "Count from 1 to 10 using a very angry voice, then 11 to 20 using a happy voice."},
+            {t: "DARE", c: "Describe your morning routine using only 5 English words."},
+            {t: "DARE", c: "Pretend you are ordering coffee in a fancy café and act it out for the group."},
+            {t: "DARE", c: "Name 3 things you can find in a kitchen, 3 in a bathroom, and 3 in a bedroom."},
+            {t: "DARE", c: "Give a 20-second motivational speech to the person on your right."},
+            {t: "DARE", c: "Say this tongue twister: 'How much wood would a woodchuck chuck if a woodchuck could chuck wood?'"},
+            {t: "DARE", c: "Describe your dream vacation destination without saying the name of the country."},
+            {t: "DARE", c: "Pretend you just won the lottery. Tell us what you will buy in English!"},
+            {t: "DARE", c: "Name 10 colors in English in under 10 seconds."},
+            {t: "DARE", c: "Say 'Hello, how are you?' in 3 different emotions (happy, sad, scared)."},
+            {t: "DARE", c: "Talk about your favorite hobby for 30 seconds without stopping."},
+            {t: "DARE", c: "Name five animals that live in the ocean."},
+            {t: "DARE", c: "Give the weather forecast for tomorrow like a professional TV presenter."},
+            {t: "DARE", c: "Explain how to make a cup of tea in English."},
+            {t: "DARE", c: "Tell us a short story about a magic pen in 3 sentences."},
+            {t: "DARE", c: "Spell your full name backwards out loud!"}
         ];
 
         let currentRotation = 0;
@@ -304,15 +311,12 @@
             spinBtn.disabled = true;
             spinBtn.innerText = "Spinning...";
 
-            // Pick a random degree and add 5 full spins (1800 degrees) so it looks cool
             const randomDegree = Math.floor(Math.random() * 360);
-            const totalSpin = 1800 + randomDegree;
+            const totalSpin = 1800 + randomDegree; 
             currentRotation += totalSpin;
             
-            // Spin the CSS element
             document.getElementById('wheel').style.transform = `rotate(${currentRotation}deg)`;
 
-            // Calculate what it landed on (The pointer is at top = 0 degrees)
             const normalizedRotation = (360 - (currentRotation % 360)) % 360;
             
             let resultType = "";
@@ -321,40 +325,40 @@
             else if (normalizedRotation >= 180 && normalizedRotation < 270) resultType = "RIDDLE";
             else resultType = "JOKE";
 
-            // Wait 4 seconds for the wheel to stop, then show the result!
             setTimeout(() => {
                 showResultCard(resultType);
             }, 4000);
         }
 
         function showResultCard(category) {
-            // Find all items that match what the wheel landed on
             const matchingItems = items.filter(item => item.t === category);
-            
-            // Pick a random item from that specific category
             const chosenItem = matchingItems[Math.floor(Math.random() * matchingItems.length)];
 
-            // Hide the wheel and show the card
             document.getElementById('wheel-section').style.display = 'none';
             document.getElementById('result-section').style.display = 'block';
 
-            // Fill out the card details
             document.getElementById('type').innerText = `${icons[chosenItem.t]} ${chosenItem.t}`;
             document.getElementById('content').innerText = chosenItem.c;
             
-            // Handle the reveal button logic
             document.getElementById('answer-box').style.display = "none";
+            
             if (chosenItem.a) {
+                // If it's a Joke/Riddle: Show the Reveal button, keep WA button hidden
                 document.getElementById('ans-btn').style.display = "block";
                 document.getElementById('answer-box').innerText = chosenItem.a;
+                document.getElementById('wa-section').style.display = "none"; 
             } else {
+                // If it's a Fact/Dare: Hide the Reveal button, show the WA button instantly
                 document.getElementById('ans-btn').style.display = "none";
+                document.getElementById('wa-section').style.display = "block";
             }
         }
 
         function revealAnswer() {
+            // Once they click reveal, show the answer AND the WhatsApp button
             document.getElementById('answer-box').style.display = "block";
             document.getElementById('ans-btn').style.display = "none";
+            document.getElementById('wa-section').style.display = "block";
         }
     </script>
 </body>
