@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Club Mystery</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; background: #f4f4f4; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 350px; margin: auto; }
+        #type { color: blue; font-weight: bold; text-transform: uppercase; }
+        button { background: blue; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 10px; cursor: pointer; }
+        #ans-btn { background: orange; display: none; }
+        #answer { display: none; color: green; font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <p id="type">English Club Mystery</p>
+        <h2 id="content">Scan to Start!</h2>
+        <div id="answer"></div>
+        <button id="ans-btn" onclick="showAnswer()">Show Answer</button>
+        <br>
+        <button onclick="runNext()">Next Mystery!</button>
+    </div>
+
+    <script>
+        const items = [
+            {t: "FACT", c: "The word 'set' has the most definitions in English."},
+            {t: "JOKE", c: "Why was the math book sad?", a: "Because it had too many problems!"},
+            {t: "RIDDLE", c: "What has a neck but no head?", a: "A bottle!"},
+            {t: "DARE", c: "Say 'Hello' to someone in a British accent!"}
+            // We will add the other 96 items here later!
+        ];
+
+        function runNext() {
+            let i = parseInt(localStorage.getItem('idx')) || 0;
+            let item = items[i];
+            
+            document.getElementById('type').innerText = item.t;
+            document.getElementById('content').innerText = item.c;
+            document.getElementById('answer').style.display = "none";
+            
+            if (item.a) {
+                document.getElementById('ans-btn').style.display = "inline-block";
+                document.getElementById('answer').innerText = item.a;
+            } else {
+                document.getElementById('ans-btn').style.display = "none";
+            }
+
+            localStorage.setItem('idx', (i + 1) % items.length);
+        }
+
+        function showAnswer() {
+            document.getElementById('answer').style.display = "block";
+        }
+    </script>
+</body>
+</html>
