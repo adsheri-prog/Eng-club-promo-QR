@@ -1,70 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English Club Mystery</title>
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 20px; background: #f4f4f4; }
-        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 350px; margin: auto; }
-        #type { color: blue; font-weight: bold; text-transform: uppercase; }
-        button { background: blue; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 10px; cursor: pointer; }
-        #ans-btn { background: orange; display: none; }
-        #answer { display: none; color: green; font-weight: bold; margin-top: 10px; }
+        body { font-family: 'Segoe UI', sans-serif; text-align: center; background: #f0fdf4; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 90%; max-width: 350px; }
+        #type { color: #2563eb; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; display: block; margin-bottom: 10px; }
+        #content { font-size: 1.4rem; color: #1f2937; margin-bottom: 20px; min-height: 80px; display: flex; align-items: center; justify-content: center; line-height: 1.3; }
+        #answer { display: none; color: #059669; font-weight: bold; margin: 15px 0; padding-top: 15px; border-top: 1px dashed #ddd; }
+        
+        /* Buttons */
+        .btn { border: none; padding: 12px 24px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; font-size: 1rem; margin-top: 10px; transition: 0.2s; }
+        .btn-ans { background: #f59e0b; color: white; }
+        .btn-wa { background: #25D366; color: white; margin-top: 25px; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); }
+        .btn:active { transform: scale(0.98); }
+        
+        .footer { margin-top: 20px; font-size: 0.75rem; color: #9ca3af; }
     </style>
 </head>
 <body>
+
     <div class="card">
-        <p id="type">English Club Mystery</p>
-        <h2 id="content">Scan to Start!</h2>
+        <span id="type">Loading...</span>
+        <div id="content">Reading the mystery...</div>
+        
         <div id="answer"></div>
-        <button id="ans-btn" onclick="showAnswer()">Show Answer</button>
-        <br>
-        <button onclick="runNext()">Next Mystery!</button>
+        <button id="ans-btn" class="btn btn-ans" onclick="showAnswer()" style="display: none;">Show Answer</button>
+
+        <a href="https://chat.whatsapp.com/IUc7l6fWtV1GsyCVFdBD5v?mode=gi_t" target="_blank" style="text-decoration: none;">
+            <button class="btn btn-wa">Join our WhatsApp! 💬</button>
+        </a>
+
+        <div class="footer">Scan again for a new mystery!</div>
     </div>
 
     <script>
         const items = [
-            // ROUND 1
             {t: "FACT", c: "The word 'set' has the most definitions in English."},
             {t: "JOKE", c: "Why was the math book sad?", a: "Because it had too many problems!"},
             {t: "RIDDLE", c: "What has a neck but no head?", a: "A bottle!"},
             {t: "DARE", c: "Say 'Hello' to someone in a British accent!"},
-            // ROUND 2
+            
             {t: "FACT", c: "'Dreamt' is the only English word that ends in 'mt'."},
             {t: "JOKE", c: "What do you call a bear with no teeth?", a: "A gummy bear!"},
             {t: "RIDDLE", c: "What has to be broken before you can use it?", a: "An egg!"},
-            {t: "DARE", c: "Recite the alphabet backwards as fast as you can!"},
-            // ROUND 3
+            {t: "DARE", c: "Recite the alphabet backwards in 15 seconds!"},
+
             {t: "FACT", c: "The shortest complete sentence in English is 'I am.'"},
             {t: "JOKE", c: "Why do we tell actors to 'break a leg'?", a: "Because every play has a cast!"},
-            {t: "RIDDLE", c: "What has many keys but can't open a single lock?", a: "A piano!"},
-            {t: "DARE", c: "Spell the word 'Onomatopoeia' out loud perfectly."},
-            // ROUND 4
+            {t: "RIDDLE", c: "What has many keys but can't open a lock?", a: "A piano!"},
+            {t: "DARE", c: "Spell 'Onomatopoeia' out loud right now."},
+
             {t: "FACT", c: "The dot over an 'i' or 'j' is called a 'tittle'."},
             {t: "JOKE", c: "How do you make a tissue dance?", a: "Put a little boogey in it!"},
             {t: "RIDDLE", c: "What has one eye but can’t see?", a: "A needle!"},
-            {t: "DARE", c: "Give a 30-second speech about why English is cool."},
-            // ROUND 5
-            {t: "FACT", c: "Typewriter is the longest word you can type using only the top row of a QWERTY keyboard."},
-            {t: "JOKE", c: "What’s the longest word in the world?", a: "Smiles! (There's a 'mile' between the S's)"},
+            {t: "DARE", c: "Give a 30-second speech on why English is cool."},
+
+            {t: "FACT", c: "Typewriter is the longest word you can type using only one row of keys."},
+            {t: "JOKE", c: "What’s the longest word in the world?", a: "Smiles! (There is a mile between the S's)"},
             {t: "RIDDLE", c: "What is full of holes but still holds water?", a: "A sponge!"},
             {t: "DARE", c: "Compliment 3 people in English within the next hour."},
-            // ... (I have 80 more ready if you need them, or you can repeat these patterns!)
+
+            {t: "FACT", c: "English is the official language of 67 countries."},
+            {t: "JOKE", c: "What did the zero say to the eight?", a: "Nice belt!"},
+            {t: "RIDDLE", c: "What has a thumb and four fingers but is not a hand?", a: "A glove!"},
+            {t: "DARE", c: "Say a tongue twister three times fast!"},
+
+            {t: "FACT", c: "The most common adjective used in English is 'good'."},
+            {t: "JOKE", c: "Why did the teacher wear sunglasses?", a: "Because the students were so bright!"},
+            {t: "RIDDLE", c: "What comes down but never goes up?", a: "Rain!"},
+            {t: "DARE", c: "Sing the chorus of your favorite English song."},
+
+            {t: "FACT", c: "A new word is added to the dictionary every two hours."},
+            {t: "JOKE", c: "Why can't a nose be 12 inches long?", a: "Because then it would be a foot!"},
+            {t: "RIDDLE", c: "What has hands but cannot clap?", a: "A clock!"},
+            {t: "DARE", c: "Describe your day using only 3 adjectives."},
+
+            {t: "FACT", c: "The most used noun in the English language is 'time'."},
+            {t: "JOKE", c: "What do you call a fish with no eyes?", a: "A fsh!"},
+            {t: "RIDDLE", c: "The more of this there is, the less you see. What is it?", a: "Darkness!"},
+            {t: "DARE", c: "Try to touch your nose with your tongue!"},
+
+            {t: "FACT", c: "About 4,000 words are added to the dictionary each year."},
+            {t: "JOKE", c: "Why did the cookie go to the doctor?", a: "Because he felt crumb-y!"},
+            {t: "RIDDLE", c: "What has a head and a tail but no body?", a: "A coin!"},
+            {t: "DARE", c: "Make an 'English Club' pun right now."}
         ];
 
-        function runNext() {
+        function runMystery() {
             let i = parseInt(localStorage.getItem('idx')) || 0;
             let item = items[i];
             
             document.getElementById('type').innerText = item.t;
             document.getElementById('content').innerText = item.c;
-            document.getElementById('answer').style.display = "none";
             
             if (item.a) {
-                document.getElementById('ans-btn').style.display = "inline-block";
+                document.getElementById('ans-btn').style.display = "block";
                 document.getElementById('answer').innerText = item.a;
+                document.getElementById('answer').style.display = "none";
             } else {
                 document.getElementById('ans-btn').style.display = "none";
+                document.getElementById('answer').style.display = "none";
             }
 
             localStorage.setItem('idx', (i + 1) % items.length);
@@ -72,7 +110,10 @@
 
         function showAnswer() {
             document.getElementById('answer').style.display = "block";
+            document.getElementById('ans-btn').style.display = "none";
         }
+
+        runMystery();
     </script>
 </body>
 </html>
