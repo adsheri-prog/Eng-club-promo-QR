@@ -32,61 +32,81 @@
         .d4 { bottom: 15%; right: 10%; animation-delay: 3s; transform: rotate(15deg); }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* Main Mystery Card */
-        .card { 
-            background: white; 
-            padding: 40px 30px; 
-            border-radius: 30px; 
-            box-shadow: 0 15px 35px rgba(219, 39, 119, 0.15); 
-            width: 100%; 
-            max-width: 340px; 
-            margin-bottom: 25px; 
-            border: 4px solid #fce7f3;
-            box-sizing: border-box;
-        }
-
-        #type { color: #db2777; font-weight: 900; text-transform: uppercase; font-size: 1rem; letter-spacing: 2px; display: block; margin-bottom: 15px; }
-        #content { font-size: 1.5rem; color: #1f2937; margin-bottom: 25px; min-height: 80px; display: flex; align-items: center; justify-content: center; line-height: 1.4; font-weight: 800; }
-        
-        #answer-box { display: none; color: #059669; font-weight: 900; margin: 15px 0; padding: 15px; border-top: 3px dashed #d1fae5; background: #ecfdf5; border-radius: 15px; font-size: 1.2rem; }
-        
-        .btn-ans { background: #f59e0b; color: white; border: none; padding: 16px 24px; border-radius: 20px; font-weight: 900; cursor: pointer; width: 100%; font-size: 1.1rem; margin-top: 10px; transition: 0.2s; display: none; box-shadow: 0 6px 0 #d97706; }
-        .btn-ans:active { transform: translateY(6px); box-shadow: 0 0 0 #d97706; }
-
         /* Welcome & WhatsApp Section */
         .welcome-section {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 20px;
             border-radius: 20px;
             width: 100%;
             max-width: 340px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
             box-sizing: border-box;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            border: 2px solid #fce7f3;
         }
         
-        .welcome-text {
-            color: #4b5563;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin: 0 0 15px 0;
-            font-weight: 600;
+        .welcome-text { color: #4b5563; font-size: 0.95rem; line-height: 1.5; margin: 0 0 15px 0; font-weight: 800; }
+
+        /* --- THE WHEEL SECTION --- */
+        #wheel-section { display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 20px; }
+        
+        .wheel-container { position: relative; width: 260px; height: 260px; margin: 10px auto 20px auto; }
+        
+        /* The Pointer Arrow */
+        .pointer {
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            width: 0; height: 0;
+            border-left: 18px solid transparent;
+            border-right: 18px solid transparent;
+            border-top: 30px solid #1f2937;
+            z-index: 10;
+            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2));
         }
 
+        /* The Spinning Wheel */
+        .wheel {
+            width: 100%; height: 100%; border-radius: 50%;
+            background: conic-gradient(
+                #f472b6 0deg 90deg,   /* Pink: DARE */
+                #60a5fa 90deg 180deg, /* Blue: FACT */
+                #a78bfa 180deg 270deg,/* Purple: RIDDLE */
+                #fbbf24 270deg 360deg /* Yellow: JOKE */
+            );
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: 6px solid white;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Wheel Text Labels */
+        .wheel-text { position: absolute; font-weight: 900; color: white; font-size: 1.1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); letter-spacing: 1px; }
+        .txt-dare { top: 18%; right: 12%; transform: rotate(45deg); }
+        .txt-fact { bottom: 18%; right: 12%; transform: rotate(135deg); }
+        .txt-riddle { bottom: 18%; left: 10%; transform: rotate(225deg); }
+        .txt-joke { top: 18%; left: 12%; transform: rotate(315deg); }
+
+        .btn-spin { background: #db2777; color: white; border: none; padding: 16px 30px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 1.2rem; transition: 0.2s; box-shadow: 0 6px 0 #be185d; text-transform: uppercase; letter-spacing: 2px; }
+        .btn-spin:active { transform: translateY(6px); box-shadow: 0 0 0 #be185d; }
+        .btn-spin:disabled { background: #9ca3af; box-shadow: 0 6px 0 #6b7280; cursor: not-allowed; }
+
+        /* --- THE RESULT CARD (Hidden at first) --- */
+        #result-section { display: none; width: 100%; max-width: 340px; margin-bottom: 25px; }
+        
+        .card { background: white; padding: 40px 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(219, 39, 119, 0.15); border: 4px solid #fce7f3; box-sizing: border-box; }
+        #type { color: #db2777; font-weight: 900; text-transform: uppercase; font-size: 1rem; letter-spacing: 2px; display: block; margin-bottom: 15px; }
+        #content { font-size: 1.5rem; color: #1f2937; margin-bottom: 25px; min-height: 80px; display: flex; align-items: center; justify-content: center; line-height: 1.4; font-weight: 800; }
+        #answer-box { display: none; color: #059669; font-weight: 900; margin: 15px 0; padding: 15px; border-top: 3px dashed #d1fae5; background: #ecfdf5; border-radius: 15px; font-size: 1.2rem; }
+        
+        .btn-ans { background: #f59e0b; color: white; border: none; padding: 16px 24px; border-radius: 20px; font-weight: 900; cursor: pointer; width: 100%; font-size: 1.1rem; margin-top: 10px; transition: 0.2s; display: none; box-shadow: 0 6px 0 #d97706; }
+        .btn-ans:active { transform: translateY(6px); box-shadow: 0 0 0 #d97706; }
+
+        /* WhatsApp Button Below Everything */
         .wa-link { display: inline-flex; align-items: center; justify-content: center; background: white; color: #1f2937; text-decoration: none; font-weight: 900; padding: 14px 28px; border-radius: 50px; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2); border: 2px solid #e5e7eb; transition: 0.2s; font-size: 1.1rem; width: 100%; box-sizing: border-box; }
         .wa-link:active { transform: scale(0.95); }
         .wa-icon { width: 28px; height: 28px; margin-left: 10px; fill: #25D366; }
 
-        /* Motivational Quote Footer */
-        .quote-box {
-            color: #db2777;
-            font-size: 0.9rem;
-            font-style: italic;
-            font-weight: 800;
-            max-width: 300px;
-            opacity: 0.8;
-            margin-top: 10px;
-        }
+        .quote-box { color: #db2777; font-size: 0.9rem; font-style: italic; font-weight: 800; max-width: 300px; opacity: 0.8; margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -96,43 +116,50 @@
     <div class="doodle d3">📖</div>
     <div class="doodle d4">🎉</div>
 
-    <div class="card">
-        <span id="type">Loading...</span>
-        <div id="content">Reading the mystery...</div>
+    <div class="welcome-section">
+        <p class="welcome-text">Welcome to the English Club! We are a friendly, supportive community for students who want to practice speaking English without the stress.</p>
         
-        <div id="answer-box"></div>
-        <button id="ans-btn" class="btn-ans" onclick="revealAnswer()">Reveal Answer 🔑</button>
+        <a href="https://chat.whatsapp.com/IUc7l6fWtV1GsyCVFdBD5v?mode=gi_t" target="_blank" class="wa-link">
+            Join the Club Here!
+            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
+        </a>
     </div>
 
-    <div class="welcome-section">
-        <p class="welcome-text">Welcome to the English Club! We are a friendly, supportive community for students who want to practice speaking English without the stress. Tap the link below to join!</p>
-        <a href="https://chat.whatsapp.com/IUc7l6fWtV1GsyCVFdBD5v?mode=gi_t" target="_blank" class="wa-link">
-            Join the Club
-            <svg class="wa-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-            </svg>
-        </a>
+    <div id="wheel-section">
+        <div class="wheel-container">
+            <div class="pointer"></div>
+            <div class="wheel" id="wheel">
+                <span class="wheel-text txt-dare">DARE</span>
+                <span class="wheel-text txt-fact">FACT</span>
+                <span class="wheel-text txt-riddle">RIDDLE</span>
+                <span class="wheel-text txt-joke">JOKE</span>
+            </div>
+        </div>
+        <button id="spin-btn" class="btn-spin" onclick="spinWheel()">Spin to Play!</button>
+    </div>
+
+    <div id="result-section">
+        <div class="card">
+            <span id="type">Loading...</span>
+            <div id="content">Reading the mystery...</div>
+            <div id="answer-box"></div>
+            <button id="ans-btn" class="btn-ans" onclick="revealAnswer()">Reveal Answer 🔑</button>
+        </div>
     </div>
 
     <div id="quote-display" class="quote-box"></div>
 
     <script>
         const icons = { "FACT": "💡", "JOKE": "😂", "RIDDLE": "🤔", "DARE": "🎯" };
-
         const quotes = [
             "Mistakes are just proof that you are trying! Keep going.",
             "A different language is a different vision of life.",
             "Don't be afraid to speak; every expert was once a beginner.",
             "The beautiful thing about learning is nobody can take it from you.",
-            "Language is the road map of a culture.",
-            "Do what you can, with what you have, where you are.",
-            "Every time you speak, you are getting better and better.",
-            "Small steps every day lead to big results.",
-            "Learning a language is like opening a new window to the world.",
-            "Confidence comes from practice. You've got this!"
+            "Language is the road map of a culture."
         ];
 
-        // Ensure you paste YOUR FULL 100 ITEMS HERE! (I've included the first 8 to save space)
+        // PASTE YOUR FULL 100 ITEMS HERE!
        const items = [
             // 1-4
             {t: "FACT", c: "The word 'set' has the most definitions in the English dictionary."},
@@ -261,39 +288,74 @@
             {t: "DARE", c: "Share this QR code with one other student today!"}
         ];
 
-        function displayMysteryOnLoad() {
-            let i = parseInt(localStorage.getItem('idx')) || 0;
-            let item = items[i];
+        let currentRotation = 0;
+
+        function setRandomQuote() {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('quote-display').innerText = `"${randomQuote}"`;
+        }
+
+        window.onload = function() {
+            setRandomQuote();
+        };
+
+        function spinWheel() {
+            const spinBtn = document.getElementById('spin-btn');
+            spinBtn.disabled = true;
+            spinBtn.innerText = "Spinning...";
+
+            // Pick a random degree and add 5 full spins (1800 degrees) so it looks cool
+            const randomDegree = Math.floor(Math.random() * 360);
+            const totalSpin = 1800 + randomDegree;
+            currentRotation += totalSpin;
             
-            // Set text & dynamic icon
-            document.getElementById('type').innerText = `${icons[item.t]} ${item.t}`;
-            document.getElementById('content').innerText = item.c;
+            // Spin the CSS element
+            document.getElementById('wheel').style.transform = `rotate(${currentRotation}deg)`;
+
+            // Calculate what it landed on (The pointer is at top = 0 degrees)
+            const normalizedRotation = (360 - (currentRotation % 360)) % 360;
             
-            // Set Motivational Quote based on the same index so it changes every time
-            document.getElementById('quote-display').innerText = `"${quotes[i % quotes.length]}"`;
+            let resultType = "";
+            if (normalizedRotation >= 0 && normalizedRotation < 90) resultType = "DARE";
+            else if (normalizedRotation >= 90 && normalizedRotation < 180) resultType = "FACT";
+            else if (normalizedRotation >= 180 && normalizedRotation < 270) resultType = "RIDDLE";
+            else resultType = "JOKE";
+
+            // Wait 4 seconds for the wheel to stop, then show the result!
+            setTimeout(() => {
+                showResultCard(resultType);
+            }, 4000);
+        }
+
+        function showResultCard(category) {
+            // Find all items that match what the wheel landed on
+            const matchingItems = items.filter(item => item.t === category);
             
-            // Hide answer box initially
+            // Pick a random item from that specific category
+            const chosenItem = matchingItems[Math.floor(Math.random() * matchingItems.length)];
+
+            // Hide the wheel and show the card
+            document.getElementById('wheel-section').style.display = 'none';
+            document.getElementById('result-section').style.display = 'block';
+
+            // Fill out the card details
+            document.getElementById('type').innerText = `${icons[chosenItem.t]} ${chosenItem.t}`;
+            document.getElementById('content').innerText = chosenItem.c;
+            
+            // Handle the reveal button logic
             document.getElementById('answer-box').style.display = "none";
-            
-            if (item.a) {
-                // Show Reveal Button if there is an answer
+            if (chosenItem.a) {
                 document.getElementById('ans-btn').style.display = "block";
-                document.getElementById('answer-box').innerText = item.a;
+                document.getElementById('answer-box').innerText = chosenItem.a;
             } else {
-                // Hide Reveal Button completely for Facts/Dares
                 document.getElementById('ans-btn').style.display = "none";
             }
-
-            // Save the next item for tomorrow's scan
-            localStorage.setItem('idx', (i + 1) % items.length);
         }
 
         function revealAnswer() {
             document.getElementById('answer-box').style.display = "block";
             document.getElementById('ans-btn').style.display = "none";
         }
-
-        window.onload = displayMysteryOnLoad;
     </script>
 </body>
 </html>
