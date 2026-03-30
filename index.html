@@ -176,8 +176,31 @@
     </div>
 
     <div id="quote-display" class="quote-box"></div>
-
+let lastCategory = "";
+        let streakCount = 0;
+        let currentRotation = 0;
     <script>
+        // --- AUDIO ENGINE ---
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playTick() {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    
+    // 600 is a nice sharp "click" frequency
+    osc.frequency.setValueAtTime(600, audioCtx.currentTime); 
+    osc.frequency.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+    
+    // 0.5 for a solid, loud volume
+    gain.gain.setValueAtTime(0.5, audioCtx.currentTime); 
+    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.1);
+}
         const icons = { "FACT": "💡", "JOKE": "😂", "RIDDLE": "🤔", "DARE": "🎯" };
         const quotes = [
             "Mistakes are just proof that you are trying! Keep going.",
@@ -313,28 +336,67 @@
 
         function spinWheel() {
             const spinBtn = document.getElementById('spin-btn');
+            if (spinBtn.disabled) return;
             spinBtn.disabled = true;
             spinBtn.innerText = "Spinning...";
 
-            const randomDegree = Math.floor(Math.random() * 360);
-            const totalSpin = 1800 + randomDegree; 
-            currentRotation += totalSpin;
-            
+            const categories = ["DARE", "FACT", "RIDDLE", "JOKE"];
+            let resultType = "";
+
+            // --- 1. ANTI-REPEAT LOGIC (No more than 2 in a row) ---
+            while (resultType === "") {
+                let pick = categories[Math.floor(Math.random() * categories.length)];
+                if (pick === lastCategory) {
+                    if (streakCount < 2) { resultType = pick; streakCount++; }
+                } else {
+                    resultType = pick;
+                    lastCategory = pick;
+                    streakCount = 1;
+                }
+            }
+
+            // --- 2. ANTI-LINE MATH (Stay 15° away from edges) ---
+            let baseDegree = 0;
+            if (resultType === "DARE") baseDegree = 45;    
+            if (resultType === "FACT") baseDegree = 135;   
+            if (resultType === "RIDDLE") baseDegree = 225; 
+            if (resultType === "JOKE") baseDegree = 315;   
+
+            const wobble = Math.floor(Math.random() * 60) - 30; // Random offset inside the slice
+            const finalLandingAngle = baseDegree + wobble;
+
+            const targetRotation = 360 - finalLandingAngle;
+            const extraSpins = (Math.floor(Math.random() * 5) + 5) * 360; 
+            const currentRotationInCircle = currentRotation % 360;
+            let distanceToTarget = targetRotation - currentRotationInCircle;
+            if (distanceToTarget <= 0) distanceToTarget += 360;
+
+            currentRotation += (extraSpins + distanceToTarget);
+
+            // --- 3. LOUDER SOUND TRIGGER ---
+            let lastTickAngle = 0;
+            let startTime = performance.now();
+            function animateTick(now) {
+                const wheelEl = document.getElementById('wheel');
+                const style = window.getComputedStyle(wheelEl);
+                const matrix = new WebKitCSSMatrix(style.transform);
+                const currentAngle = Math.atan2(matrix.b, matrix.a) * (180/Math.PI);
+                
+                if (Math.abs(currentAngle - lastTickAngle) > 20) {
+                    playTick(); // Ensure you added the playTick function I gave you earlier!
+                    lastTickAngle = currentAngle;
+                }
+                if (now - startTime < 4000) requestAnimationFrame(animateTick);
+            }
+            requestAnimationFrame(animateTick);
+
+            // --- 4. EXECUTE SPIN ---
             document.getElementById('wheel').style.transform = `rotate(${currentRotation}deg)`;
 
-            const normalizedRotation = (360 - (currentRotation % 360)) % 360;
-            
-            let resultType = "";
-            if (normalizedRotation >= 0 && normalizedRotation < 90) resultType = "DARE";
-            else if (normalizedRotation >= 90 && normalizedRotation < 180) resultType = "FACT";
-            else if (normalizedRotation >= 180 && normalizedRotation < 270) resultType = "RIDDLE";
-            else resultType = "JOKE";
-
             setTimeout(() => {
-                showResultCard(resultType);
+                showResultCard(resultType); // Make sure this matches your card function name
             }, 4000);
         }
-
         function showResultCard(category) {
             const matchingItems = items.filter(item => item.t === category);
             const chosenItem = matchingItems[Math.floor(Math.random() * matchingItems.length)];
