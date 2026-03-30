@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Club Mystery</title>
+    <title>English Club Mystery - CAIAS Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
     <style>
         body { 
@@ -19,7 +19,7 @@
             background-image: radial-gradient(#fbcfe8 2px, transparent 2px);
             background-size: 30px 30px;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
             padding: 20px;
             box-sizing: border-box;
         }
@@ -27,9 +27,9 @@
         /* Floating Doodles */
         .doodle { position: absolute; font-size: 2rem; opacity: 0.6; user-select: none; z-index: -1; animation: float 6s ease-in-out infinite; }
         .d1 { top: 10%; left: 10%; animation-delay: 0s; }
-        .d2 { top: 20%; right: 15%; animation-delay: 1s; }
-        .d3 { bottom: 25%; left: 15%; animation-delay: 2s; transform: rotate(-15deg); }
-        .d4 { bottom: 15%; right: 10%; animation-delay: 3s; transform: rotate(15deg); }
+        .d2 { top: 20%; right: 15%; animation-delay: 1.5s; }
+        .d3 { bottom: 25%; left: 15%; animation-delay: 3s; transform: rotate(-15deg); }
+        .d4 { bottom: 15%; right: 10%; animation-delay: 4.5s; transform: rotate(15deg); }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
         /* Welcome Text Boxes */
@@ -48,7 +48,7 @@
             font-weight: 800;
         }
 
-        /* --- THE UPGRADED WHEEL SECTION --- */
+        /* --- THE WHEEL SECTION --- */
         #wheel-section { display: flex; flex-direction: column; align-items: center; width: 100%; margin-bottom: 20px; margin-top: 10px; }
         
         .wheel-container { position: relative; width: 280px; height: 280px; margin: 20px auto 30px auto; }
@@ -86,7 +86,7 @@
         .txt-riddle { bottom: 18%; left: 10%; transform: rotate(225deg); }
         .txt-joke { top: 18%; left: 12%; transform: rotate(315deg); }
 
-        .btn-spin { background: #db2777; color: white; border: none; padding: 16px 35px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 1.3rem; transition: 0.2s; box-shadow: 0 6px 0 #be185d; text-transform: uppercase; letter-spacing: 2px; }
+        .btn-spin { background: #db2777; color: white; border: none; padding: 16px 35px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 1.3rem; transition: 0.2s; box-shadow: 0 6px 0 #be185d; text-transform: uppercase; letter-spacing: 2px; width: 100%; max-width: 280px;}
         .btn-spin:active { transform: translateY(6px); box-shadow: 0 0 0 #be185d; }
         .btn-spin:disabled { background: #9ca3af; box-shadow: 0 6px 0 #6b7280; cursor: not-allowed; }
 
@@ -95,16 +95,14 @@
         
         .card { background: white; padding: 40px 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(219, 39, 119, 0.15); border: 4px solid #fce7f3; box-sizing: border-box; }
         #type { color: #db2777; font-weight: 900; text-transform: uppercase; font-size: 1rem; letter-spacing: 2px; display: block; margin-bottom: 15px; }
-        #content { font-size: 1.5rem; color: #1f2937; margin-bottom: 25px; min-height: 80px; display: flex; align-items: center; justify-content: center; line-height: 1.4; font-weight: 800; }
+        #content { font-size: 1.4rem; color: #1f2937; margin-bottom: 25px; min-height: 80px; display: flex; align-items: center; justify-content: center; line-height: 1.4; font-weight: 800; }
         #answer-box { display: none; color: #059669; font-weight: 900; margin: 15px 0; padding: 15px; border-top: 3px dashed #d1fae5; background: #ecfdf5; border-radius: 15px; font-size: 1.2rem; }
         
         .btn-ans { background: #f59e0b; color: white; border: none; padding: 16px 24px; border-radius: 20px; font-weight: 900; cursor: pointer; width: 100%; font-size: 1.1rem; margin-top: 10px; transition: 0.2s; display: none; box-shadow: 0 6px 0 #d97706; }
         .btn-ans:active { transform: translateY(6px); box-shadow: 0 0 0 #d97706; }
 
-        /* Actions wrapper for buttons below the wheel */
         #actions-wrapper { width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 15px; }
 
-        /* WhatsApp Button */
         #wa-section { display: none; width: 100%; }
         .wa-link { display: inline-flex; align-items: center; justify-content: center; background: white; color: #1f2937; text-decoration: none; font-weight: 900; padding: 16px 28px; border-radius: 50px; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2); border: 2px solid #e5e7eb; transition: 0.2s; font-size: 1.1rem; width: 100%; box-sizing: border-box; }
         .wa-link:active { transform: scale(0.95); }
@@ -157,7 +155,7 @@
     </div>
 
     <div id="actions-wrapper">
-        <button id="next-btn" class="btn-spin" onclick="resetGame()" style="display: none; width: 100%; background: #8b5cf6; box-shadow: 0 6px 0 #6d28d9; text-transform: none; letter-spacing: normal; font-size: 1.1rem; padding: 16px 20px;">
+        <button id="next-btn" class="btn-spin" onclick="resetGame()" style="display: none; width: 100%; max-width: none; background: #8b5cf6; box-shadow: 0 6px 0 #6d28d9; text-transform: none; letter-spacing: normal; font-size: 1.1rem; padding: 16px 20px;">
             Next Player / Spin Again 🎲
         </button>
 
@@ -183,9 +181,29 @@
             "Every time you speak, you are getting better and better."
         ];
 
-        // FULL 100 ITEMS
+        let lastCategory = "";
+        let streakCount = 0;
+        let currentRotation = 0;
+
+        // PROCEDURAL CLICK SOUND (Web Audio API)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playTick() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.1);
+        }
+
+        // FULL 100 ITEMS LIST
         const items = [
-            // --- FACTS ---
             {t: "FACT", c: "The shortest complete sentence in English is 'Go.'"},
             {t: "FACT", c: "The word 'set' has the highest number of different meanings in the English dictionary."},
             {t: "FACT", c: "'I am' is the shortest complete sentence in the English language."},
@@ -211,8 +229,6 @@
             {t: "FACT", c: "The word 'swims' looks exactly the same when turned upside down."},
             {t: "FACT", c: "The symbol '#' is actually called an octothorpe, not a hashtag!"},
             {t: "FACT", c: "English is the language of the sky! All international pilots must speak English."},
-
-            // --- JOKES ---
             {t: "JOKE", c: "Why was the math book sad?", a: "Because it had too many problems!"},
             {t: "JOKE", c: "What do you call a bear with no teeth?", a: "A gummy bear!"},
             {t: "JOKE", c: "Why did the student eat his homework?", a: "Because his teacher said it was a piece of cake!"},
@@ -238,8 +254,6 @@
             {t: "JOKE", c: "Why couldn't the pony sing in the choir?", a: "Because he was a little horse!"},
             {t: "JOKE", c: "What do elves learn in school?", a: "The Elf-abet!"},
             {t: "JOKE", c: "Why did the picture go to jail?", a: "Because it was framed!"},
-
-            // --- RIDDLES ---
             {t: "RIDDLE", c: "I have a neck but no head, and two arms but no hands. What am I?", a: "A shirt!"},
             {t: "RIDDLE", c: "I speak without a mouth and hear without ears. What am I?", a: "An echo!"},
             {t: "RIDDLE", c: "What has keys but can't open locks?", a: "A piano!"},
@@ -265,8 +279,6 @@
             {t: "RIDDLE", c: "What runs all around a backyard, yet never moves?", a: "A fence!"},
             {t: "RIDDLE", c: "You see me once in June, twice in November, and not at all in May. What am I?", a: "The letter 'E'!"},
             {t: "RIDDLE", c: "I have branches, but no fruit, trunk or leaves. What am I?", a: "A bank!"},
-
-            // --- DARES ---
             {t: "DARE", c: "Introduce yourself to the person next to you in your best British accent!"},
             {t: "DARE", c: "Say the English alphabet backwards as fast as you can!"},
             {t: "DARE", c: "Name 5 English words that start with the letter 'Z' in 10 seconds."},
@@ -294,39 +306,75 @@
             {t: "DARE", c: "Spell your full name backwards out loud!"}
         ];
 
-        let currentRotation = 0;
-
         function setRandomQuote() {
             const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
             document.getElementById('quote-display').innerText = `"${randomQuote}"`;
         }
 
-        window.onload = function() {
-            setRandomQuote();
-        };
+        window.onload = function() { setRandomQuote(); };
 
         function spinWheel() {
             const spinBtn = document.getElementById('spin-btn');
+            if (spinBtn.disabled) return;
             spinBtn.disabled = true;
             spinBtn.innerText = "Spinning...";
 
-            const randomDegree = Math.floor(Math.random() * 360);
-            const totalSpin = 1800 + randomDegree; 
-            currentRotation += totalSpin;
+            const categories = ["DARE", "FACT", "RIDDLE", "JOKE"];
+            let resultType = "";
+
+            // ANTI-REPEAT LOGIC
+            while (resultType === "") {
+                let pick = categories[Math.floor(Math.random() * categories.length)];
+                if (pick === lastCategory) {
+                    if (streakCount < 2) { resultType = pick; streakCount++; }
+                } else {
+                    resultType = pick;
+                    lastCategory = pick;
+                    streakCount = 1;
+                }
+            }
+
+            // BOUNDARY-SAFE LANDING Math
+            let baseDegree = 0;
+            if (resultType === "DARE") baseDegree = 45;    
+            if (resultType === "FACT") baseDegree = 135;   
+            if (resultType === "RIDDLE") baseDegree = 225; 
+            if (resultType === "JOKE") baseDegree = 315;   
+
+            // Wobble stays 15 degrees away from black lines
+            const wobble = Math.floor(Math.random() * 60) - 30; // Range: -30 to +30
+            const finalLandingAngle = baseDegree + wobble;
+
+            const targetRotation = 360 - finalLandingAngle;
+            const extraSpins = (Math.floor(Math.random() * 5) + 5) * 360; 
+            const currentRotationInCircle = currentRotation % 360;
+            let distanceToTarget = targetRotation - currentRotationInCircle;
+            if (distanceToTarget <= 0) distanceToTarget += 360;
+
+            currentRotation += (extraSpins + distanceToTarget);
             
+            // Sound Animation Trigger
+            let startTime = null;
+            let lastTickAngle = 0;
+            function animateSound(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = timestamp - startTime;
+                const style = window.getComputedStyle(document.getElementById('wheel'));
+                const matrix = new WebKitCSSMatrix(style.transform);
+                const currentAngle = Math.atan2(matrix.b, matrix.a) * (180/Math.PI);
+                
+                // Play tick every 90 degrees of visual movement
+                if (Math.abs(currentAngle - lastTickAngle) > 15) {
+                    playTick();
+                    lastTickAngle = currentAngle;
+                }
+                if (progress < 4000) requestAnimationFrame(animateSound);
+            }
+            requestAnimationFrame(animateSound);
+
             document.getElementById('wheel').style.transform = `rotate(${currentRotation}deg)`;
 
-            const normalizedRotation = (360 - (currentRotation % 360)) % 360;
-            
-            let resultType = "";
-            if (normalizedRotation >= 0 && normalizedRotation < 90) resultType = "DARE";
-            else if (normalizedRotation >= 90 && normalizedRotation < 180) resultType = "FACT";
-            else if (normalizedRotation >= 180 && normalizedRotation < 270) resultType = "RIDDLE";
-            else resultType = "JOKE";
-
-            setTimeout(() => {
-                showResultCard(resultType);
-            }, 4000);
+            setTimeout(() => { showResultCard(resultType); }, 4000);
         }
 
         function showResultCard(category) {
@@ -335,27 +383,18 @@
 
             document.getElementById('wheel-section').style.display = 'none';
             document.getElementById('result-section').style.display = 'block';
-
             document.getElementById('type').innerText = `${icons[chosenItem.t]} ${chosenItem.t}`;
             document.getElementById('content').innerText = chosenItem.c;
             
-            // Handle CAIAS Insta message logic
-            if (category === "DARE") {
-                document.getElementById('dare-bonus').style.display = "block";
-            } else {
-                document.getElementById('dare-bonus').style.display = "none";
-            }
-            
+            document.getElementById('dare-bonus').style.display = (category === "DARE") ? "block" : "none";
             document.getElementById('answer-box').style.display = "none";
             
             if (chosenItem.a) {
-                // Joke/Riddle: Needs answering first
                 document.getElementById('ans-btn').style.display = "block";
                 document.getElementById('answer-box').innerText = chosenItem.a;
                 document.getElementById('wa-section').style.display = "none"; 
                 document.getElementById('next-btn').style.display = "none"; 
             } else {
-                // Fact/Dare: Show everything immediately
                 document.getElementById('ans-btn').style.display = "none";
                 document.getElementById('next-btn').style.display = "block";
                 document.getElementById('wa-section').style.display = "block";
@@ -370,18 +409,13 @@
         }
 
         function resetGame() {
-            // Hide all the result stuff
             document.getElementById('result-section').style.display = 'none';
             document.getElementById('next-btn').style.display = 'none';
             document.getElementById('wa-section').style.display = 'none';
-            
-            // Bring back the wheel
             document.getElementById('wheel-section').style.display = 'flex';
             const spinBtn = document.getElementById('spin-btn');
             spinBtn.disabled = false;
             spinBtn.innerText = "Spin to Play!";
-            
-            // Get a new quote to keep it fresh
             setRandomQuote();
         }
     </script>
