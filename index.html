@@ -137,8 +137,8 @@
     <div class="doodle d4">🎉</div>
 
     <div class="welcome-box" style="font-size: 1.2rem; margin-bottom: 10px;">
-    Welcome to the English Club! 🎉
-</div>
+        Welcome to the English Club! 🎉
+    </div>
 
     <div id="wheel-section">
         <div class="wheel-container">
@@ -159,15 +159,15 @@
             <span id="type">Loading...</span>
             <div id="content">Reading the mystery...</div>
             <div id="dare-bonus" style="display: none; color: #e11d48; font-size: 0.95rem; font-weight: 800; margin-bottom: 15px; padding: 10px; background: #ffe4e6; border-radius: 10px; border: 1px dashed #fda4af;">
-    📸 Screenshot, Record & tag us to get featured on the official CAIAS Insta page!
-</div>
+                📸 Screenshot, Record & tag us to get featured on the official CAIAS Insta page!
+            </div>
             <div id="answer-box"></div>
             <button id="ans-btn" class="btn-ans" onclick="revealAnswer()">Reveal Answer 🔑</button>
         </div>
     </div>
-<div class="welcome-box" style="margin-bottom: 20px;">
-    We are a friendly, supportive community for students who want to practice speaking English without the stress.
-</div>
+    <div class="welcome-box" style="margin-bottom: 20px;">
+        We are a friendly, supportive community for students who want to practice speaking English without the stress.
+    </div>
     <div id="wa-section">
         <a href="https://chat.whatsapp.com/IUc7l6fWtV1GsyCVFdBD5v?mode=gi_t" target="_blank" class="wa-link">
             Join the Club Here!
@@ -176,31 +176,35 @@
     </div>
 
     <div id="quote-display" class="quote-box"></div>
-let lastCategory = "";
+
+    <script>
+        // --- MEMORY VARIABLES ---
+        let lastCategory = "";
         let streakCount = 0;
         let currentRotation = 0;
-    <script>
+
         // --- AUDIO ENGINE ---
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-function playTick() {
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = 'sine';
-    
-    // 600 is a nice sharp "click" frequency
-    osc.frequency.setValueAtTime(600, audioCtx.currentTime); 
-    osc.frequency.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-    
-    // 0.5 for a solid, loud volume
-    gain.gain.setValueAtTime(0.5, audioCtx.currentTime); 
-    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-    
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.1);
-}
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playTick() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            
+            // 600 is a nice sharp "click" frequency
+            osc.frequency.setValueAtTime(600, audioCtx.currentTime); 
+            osc.frequency.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            
+            // 0.5 for a solid, loud volume
+            gain.gain.setValueAtTime(0.5, audioCtx.currentTime); 
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.1);
+        }
+
         const icons = { "FACT": "💡", "JOKE": "😂", "RIDDLE": "🤔", "DARE": "🎯" };
         const quotes = [
             "Mistakes are just proof that you are trying! Keep going.",
@@ -323,8 +327,6 @@ function playTick() {
             {t: "DARE", c: "Spell your full name backwards out loud!"}
         ];
 
-        let currentRotation = 0;
-
         function setRandomQuote() {
             const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
             document.getElementById('quote-display').innerText = `"${randomQuote}"`;
@@ -383,7 +385,7 @@ function playTick() {
                 const currentAngle = Math.atan2(matrix.b, matrix.a) * (180/Math.PI);
                 
                 if (Math.abs(currentAngle - lastTickAngle) > 20) {
-                    playTick(); // Ensure you added the playTick function I gave you earlier!
+                    playTick(); 
                     lastTickAngle = currentAngle;
                 }
                 if (now - startTime < 4000) requestAnimationFrame(animateTick);
@@ -394,9 +396,10 @@ function playTick() {
             document.getElementById('wheel').style.transform = `rotate(${currentRotation}deg)`;
 
             setTimeout(() => {
-                showResultCard(resultType); // Make sure this matches your card function name
+                showResultCard(resultType); 
             }, 4000);
         }
+
         function showResultCard(category) {
             const matchingItems = items.filter(item => item.t === category);
             const chosenItem = matchingItems[Math.floor(Math.random() * matchingItems.length)];
@@ -409,10 +412,10 @@ function playTick() {
             
             document.getElementById('answer-box').style.display = "none";
             if (category === "DARE") {
-    document.getElementById('dare-bonus').style.display = "block";
-} else {
-    document.getElementById('dare-bonus').style.display = "none";
-}
+                document.getElementById('dare-bonus').style.display = "block";
+            } else {
+                document.getElementById('dare-bonus').style.display = "none";
+            }
             
             if (chosenItem.a) {
                 // If it's a Joke/Riddle: Show the Reveal button, keep WA button hidden
